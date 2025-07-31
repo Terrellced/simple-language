@@ -120,6 +120,13 @@ public class ReachingDefs {
                 reachIn.put(nLabel, defsFromPredecessors);
 
                 // TODO: Compute reach out!
+                Set<Def> rin = reachIn.getOrDefault(nLabel, Collections.emptySet());
+                Set<Def> rout = new HashSet<>(rin);
+                rout.removeAll(kills.get.getOrDefault(nLabel, Collections.emptySet()));
+                rout.addAll(gen.getOrDefault(nLabel, Collections.emptySet()));
+                reachOut.put(nLabel, rout);
+               
+
             }
 
         } while (!reachIn.equals(oldReachIn) || !reachOut.equals(oldReachOut));
